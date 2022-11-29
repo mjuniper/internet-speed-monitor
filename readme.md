@@ -34,7 +34,7 @@ TABLE="internet_speed"
 # influxdb database
 
 ```sh
-> influx
+$ influx
 > use internetspeed
 > select * from internet_speed
 > select count(*) from internet_speed
