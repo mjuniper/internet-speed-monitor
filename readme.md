@@ -25,6 +25,10 @@ DATABASE="internetspeed"
 TABLE="internet_speed"
 ```
 
+## Note
+
+I found that my raspberry pi gets ~70 Mbps down on wifi but ~350 Mbps down on ethernet. My MBA sitting right next to it gets ~350 Mbps on the same wifi network. Not sure why the pi's wifi is so slow.
+
 # TODO:
   - use systemctl to run the job at intervals instead of crontab
   - alternatively i could refactor the script to do the speedtest in a loop and just use systemd (or cron or whatever) to start the script on boot - not sure which is better...

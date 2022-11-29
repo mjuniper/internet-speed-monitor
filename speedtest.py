@@ -20,12 +20,13 @@ jitter = round(data["ping"]["jitter"], 2)
 
 load_dotenv()
 table = os.getenv('TABLE')
+host = os.getenv('HOST')
 
 speed_data = [
     {
         "measurement" : table,
         "tags" : {
-            "host": "pi-anemoi"
+            "host": host
         },
         "fields" : {
             "download": float(download),
@@ -36,7 +37,6 @@ speed_data = [
     }
 ]
 
-host = os.getenv('HOST')
 port = os.getenv('PORT')
 username = os.getenv('USERNAME')
 password = os.getenv('PASSWORD')
