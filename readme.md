@@ -1,4 +1,4 @@
-# internet-speed-test
+# internet-speed-monitor
 
 Tests internet speed at intervals, and pushes the data into an influxdb database
 
