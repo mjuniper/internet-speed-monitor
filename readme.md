@@ -29,13 +29,45 @@ TABLE="internet_speed"
 
 I found that my raspberry pi gets ~70 Mbps down on wifi but ~350 Mbps down on ethernet. My MBA sitting right next to it gets ~350 Mbps on the same wifi network. Not sure why the pi's wifi is so slow.
 
-# TODO:
-  - use systemctl to run the job at intervals instead of crontab
-  - alternatively i could refactor the script to do the speedtest in a loop and just use systemd (or cron or whatever) to start the script on boot - not sure which is better...
+## Scheduling the script:
 
-===
+```
+# /etc/systemd/system/speedtest.service
+[Unit]
+Description=Run speedtest.sh
 
-# influxdb database
+[Service]
+User=pi
+ExecStart=/bin/sh  /home/pi/Dev/internet-speed-monitor/speedtest.sh
+```
+
+```
+# /etc/systemd/system/speedtest.timer
+[Unit]
+Description=Speedtest job timer
+
+[Timer]
+OnBootSec=1min
+OnCalendar=0/3:0:0
+Unit=speedtest.service
+
+[Install] 
+WantedBy=timers.target
+```
+
+## systemctl commands:
+systemctl start speedtest
+systemctl stop speedtest
+systemctl status speedtest
+
+systemctl list-timers  # view the status of the timers
+
+journalctl  # view the full systemd logs
+journalctl -u speedtest  # view the logs for a specific service
+journalctl -f  # tail the logs
+journalctl -f -u speedtest  # tail the logs for a specific service
+
+# interacting with the influxdb database
 
 ```sh
 $ influx
