@@ -24,7 +24,7 @@ host = os.getenv('HOST')
 
 speed_data = [
     {
-        "measurement" : table,
+        "measurement" : table, # in influxdb parlance this is a measurement but conceptually we can think of it as a table
         "tags" : {
             "host": host
         },
@@ -43,4 +43,4 @@ password = os.getenv('PASSWORD')
 database = os.getenv('DATABASE')
 client = InfluxDBClient(host, port, username, password, database)
 
-client.write_points(speed_data)
+client.write_points(speed_data) # in influxdb parlance a point is like a row/record
